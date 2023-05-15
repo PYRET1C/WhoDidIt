@@ -1,0 +1,74 @@
+{% extends "user_authentication/base.html" %}
+{% load static %}
+{% block body_block %}
+<style>
+    img {
+        max-width: 100%;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .last {
+        margin-top: 0.5rem;
+        text-align: center;
+    }
+
+    button[type="submit"] {
+        margin-top: 1.5rem;
+        margin-left: 1.5rem;
+        padding-top: 0.5rem;
+        padding-right: 0.5rem;
+        padding-bottom: 0.5rem;
+        padding-left: 0.5rem;
+        border-radius: 0.25rem;
+        background-color: #4CAF50;
+        color: white;
+        font-size: 2rem;
+        border: none;
+        cursor: pointer;
+    }
+
+    button[type="submit"]:hover {
+        background-color: #3e8e41;
+    }
+</style>
+
+<div class="jumbotron container">
+    <p>
+        As soon as you open the doors of the treasure room you find out it is completely empty. Did someone found the
+        treasure before you??
+        You look around the room and you find an old piece of paper that says:
+    </p>
+    <p>
+        "Ahoy there, ye scurvy dogs! If ye be reading this, then ye have found my so-called 'treasure.' But let me tell
+        ye, I made a fool of ye all! There be no treasure here, no gold, no jewels, nothin' but an empty room. And even
+        if there were, do ye really think I'd make it so easy for ye to find? Nay, I'm no fool. But don't be too
+        disappointed, me hearties. Ye may have not found treasure, but ye did find adventure. And isn't that what ye
+        really came for? Now go on, get outta here before I change me mind and send me crew after ye!"
+    </p>
+    <p>As you read the note, you can feel your heart sink. The words on the page reveal the truth you were dreading:
+        there is no treasure here. The pirate king had played you all for fools, leading you on a wild goose chase with
+        a map that was never meant to lead to any riches.
+    </p>
+    <p>
+        You can't help but feel a sense of disappointment and anger at the same time. After all the trials and obstacles
+        you've faced, it seems like all your efforts were for nothing. But then again, you can't help but admire the
+        pirate king's cunning and deception. If there really was any treasure to be found, he wouldn't have made it so
+        easy to locate.
+    </p>
+    <p>
+        You take a deep breath and steel yourself for the journey back. It's not the outcome you were hoping for, but at
+        least you still have your wits and your life. And who knows? Maybe there's another adventure waiting just around
+        the corner...
+    </p>
+    <p>As you descend from the treasure room, you couldn't shake off the feeling that there might be more to
+        discover in this castle. You decided to check out the dungeons, thinking that there might be something hidden
+        there. </p>
+</div>
+<div class="jumbotron container">
+    <div class="last" style="font-size: 2rem;">
+        <a href="{% url 'game_logic:solution' %}"><button type="submit">Let's Check Dungeons</button></a>
+    </div>
+</div>
+{% endblock %}

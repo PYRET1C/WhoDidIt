@@ -1,0 +1,102 @@
+{% extends "user_authentication/base.html" %}
+{% load static %}
+{% block body_block %}
+<style>
+    img {
+        max-width: 100%;
+    }
+
+    .last {
+        margin-top: 0.5rem;
+        text-align: center;
+    }
+
+    button[type="submit"] {
+        margin-top: 1.5rem;
+        margin-left: 1.5rem;
+        padding-top: 0.5rem;
+        padding-right: 0.5rem;
+        padding-bottom: 0.5rem;
+        padding-left: 0.5rem;
+        border-radius: 0.25rem;
+        background-color: #4CAF50;
+        color: white;
+        font-size: 2rem;
+        border: none;
+        cursor: pointer;
+    }
+
+    button[type="submit"]:hover {
+        background-color: #3e8e41;
+    }
+</style>
+
+{% if message %}
+<div class="jumbotron container">
+    <div class="last">
+        <b>
+            <p style="color: red;">{{ message }}</p>
+        </b>
+    </div>
+</div>
+{% endif %}
+{% if is_correct %}
+<div class="jumbotron container">
+    <div class="last">
+        <b>
+            <p style="color:green;">Scroll down to enter the secrect room</p>
+        </b>
+    </div>
+</div>
+{% endif %}
+
+<div class="jumbotron container">
+    <p>Welcome to the Winkie Mine System, adventurer. You and your group have stumbled upon this abandoned mine, and it
+        appears that fate has brought you here. As you explore the mine, you find a blueprint of the cave system in the
+        office. This could be the key to uncovering the secrets hidden within.</p>
+    <p>But beware, time is running out. You have only 10 hours to search the cave system and get out before the haunting
+        of the cave begins. Legend has it that those who are still inside the mine when night falls are never seen
+        again.</p>
+    <p>
+        Use the blueprint to navigate the cave system, and keep track of your time. You never know what you might find
+        inside the mine, but be sure to get out before the haunting begins. Good luck, adventurer.
+    </p>
+</div>
+<br>
+<br>
+<img src="{% static 'cave_system.png' %}" alt="Full Map">
+<br>
+<br>
+<div class="jumbotron container">
+    <p>
+        <b>How to navigate:</b> For navigation look at the blueprint. Each pathway is marked with separate color and
+        alphabets. You start at position A and have to go to the secret room at the end of the cave system using these
+        pathways. You will start
+        at the entrance of the cave. In the field below add the letter of each path you take, for example if you take
+        the path marked as 'A' then take path marked as 'C' to reach your destination, then your input will be
+        "AC"(without the quotes). Find the shortest path possible to reveal the secrets of the hidden room.
+    </p>
+</div>
+{% if not is_correct %}
+<div class="jumbotron container">
+    <form action="{% url 'game_logic:clue2' %}" method="post">
+        {% csrf_token %}
+        <div class="last" style="font-size: 2rem;"><input type="text" id="pathway" name="pathway"
+                placeholder="Enter the pathway">
+            <button type="submit">Submit</button>
+        </div>
+    </form>
+    <br>
+    <br>
+</div>
+{% endif %}
+
+{% if is_correct %}
+<div class="jumbotron container">
+    <div class="last" style="font-size: 2rem;">
+        <a href="{% url 'game_logic:clue3' %}"><button type="submit">Enter Secret Room</button></a>
+    </div>
+</div>
+{% endif %}
+
+{% endblock %}

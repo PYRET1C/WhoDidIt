@@ -1,0 +1,42 @@
+{% extends "user_authentication/base.html" %}
+
+{% block body_block %}
+<style>
+  .center-button {
+    display: flex;
+    justify-content: center;
+  }
+
+  .btn-lg {
+    font-size: 24px;
+    padding: 16px 32px;
+  }
+</style>
+<div class="jumbotron">
+  <h1>The Island's Legacy: Golden Mouse</h1>
+</div>
+<div class="jumbotron">
+  <p>Centuries ago, a notorious pirate named Captain Blackbeard roamed the seas, plundering ships and amassing a vast
+    treasure trove. He was feared by sailors and loved by his crew, who followed him to the ends of the earth in search
+    of wealth and adventure.</p>
+  <p>One day, Captain Blackbeard and his crew stumbled upon a deserted island in the middle of the ocean. They decided
+    to bury their treasure on the island, thinking it would be safe from prying eyes. However, the island was cursed by
+    a powerful sorceress who vowed to protect the treasure with her </p>
+  <p>Over the years, many adventurers tried to find the treasure, but none succeeded. Legend has it that the sorceress
+    placed a series of clues and traps on the island to prevent anyone from claiming the treasure.</p>
+  <p>Now, it's your turn to try your luck. You are an adventurer who has heard the legend of Captain Blackbeard's
+    treasure and has decided to set sail for the cursed island. You must use your wits and skills to solve the clues,
+    disarm the traps, and claim the treasure before the island is engulfed by a deadly storm.</p>
+</div>
+
+<div class="center-button">
+  {% if user.is_authenticated %}
+  <a href="{% url 'game_logic:game' %}">
+    <button type="button" class="btn btn-lg">Start Game</button>
+  </a>
+  {% else %}
+  <button type="button" class="btn btn-lg"><a href="{% url 'user_authentication:user_login' %}">Login</a></button>
+  {% endif %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends 'user_authentication/base.html' %}
+
+{% block body_block %}
+<style>
+    p {
+        margin-top: 1rem;
+        margin-bottom: 0.5rem;
+        font-size: 2.5rem;
+    }
+
+    button[type="submit"] {
+        margin-top: 1.5rem;
+        margin-left: 1.5rem;
+        padding-top: 0.5rem;
+        padding-right: 0.5rem;
+        padding-bottom: 0.5rem;
+        padding-left: 0.5rem;
+        border-radius: 0.25rem;
+        background-color: #4CAF50;
+        color: white;
+        font-size: 2rem;
+        border: none;
+        cursor: pointer;
+    }
+
+    button[type="submit"]:hover {
+        background-color: #3e8e41;
+    }
+
+    .last {
+        margin-top: 0.5rem;
+        text-align: center;
+    }
+</style>
+<div class="last  jumbotron container">
+    <h2>Riddle</h2>
+    <p>I am what the captain ate this morn</p>
+    <p>Before he set sail, blowin' his horn</p>
+    <p>It's something common, yet not mundane</p>
+    <p>Think hard, or ye'll search in vain</p>
+
+    <form method="post" action="{% url 'game_logic:deadend1' %}">
+        {% csrf_token %}
+        <label for="answer" style="font-size: 2rem;">What am I?</label>
+        <input type="text" id="answer" name="answer" style="margin-left: 2rem;font-size: 2rem;">
+        <button type="submit" value="option1">Submit</button>
+        <br>
+        <br>
+    </form>
+</div>
+<div class=" last">
+{% if message %}
+<p style="color: red;">{{ message }}</p>
+<p></p>
+    <p>The riddle seems hard for you. Follow the map!</p>
+    <a href="{% url 'game_logic:clue2' %}">
+        <button type="submit" name="option" value="option2" style="margin-right: 100px;">The Map</button>
+    </a>
+</div>
+{% endif %}
+{% endblock %}

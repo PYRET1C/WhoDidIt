@@ -1,0 +1,87 @@
+{% extends "user_authentication/base.html" %}
+{% load static %}
+{% block body_block %}
+<style>
+    img {
+        max-width: 100%;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .last {
+        margin-top: 0.5rem;
+        text-align: center;
+    }
+
+    button[type="submit"] {
+        margin-top: 1.5rem;
+        margin-left: 1.5rem;
+        padding-top: 0.5rem;
+        padding-right: 0.5rem;
+        padding-bottom: 0.5rem;
+        padding-left: 0.5rem;
+        border-radius: 0.25rem;
+        background-color: #4CAF50;
+        color: white;
+        font-size: 2rem;
+        border: none;
+        cursor: pointer;
+    }
+
+    button[type="submit"]:hover {
+        background-color: #3e8e41;
+    }
+</style>
+
+<div class="jumbotron container">
+    <p>As you enter the correct move on the chessboard, the board starts glowing with a soft golden light. Suddenly, a
+        small key appears on the board, along with a letter that reads:</p>
+    <p>"Congratulations, adventurer! You have proved your worth by successfully mate the black king. As a reward, I
+        present to you this key. It will open the door to your next destination, Glinda's castle in the Quadling area.
+        Beware, for the journey ahead will be perilous. Follow the path that leads down, and you will find what you seek
+        May the winds of fortune guide you."</p>
+    <p>
+        The key glows softly in your hand, and you can feel a sense of power emanating from it. You can't wait to see
+        what other adventures await you in your journey to Glinda's castle.
+    </p>
+</div>
+
+<div class="jumbotron container">
+    <p>Here is the map and the Glinda's castle is marked on it:</p>
+    <br>
+    <br>
+    <img src="{% static 'map_castle.png' %}" alt="Full Map">
+    <br>
+    <br>
+</div>
+
+<div class="jumbotron container">
+    <p>As you approach the castle, you see two paths - one leading up to the castle's entrance, and the other
+        leading down to the basement. As you consider your options, a voice booms out from the castle:</p>
+    <p>
+        "Greetings, travelers. I see you have found your way to my humble abode. I am Glinda, the Witch of the South. I
+        have been expecting you."
+    </p>
+    <p>
+        Your team is surprised by the voice, but intrigued. You approach the castle and see Glinda standing at the
+        entrance.
+    </p>
+    <p>"Welcome, welcome. I'm sure you're eager to claim your prize," she says with a mysterious smile. "But be warned,
+        there are many dangers within these walls. You must choose your path wisely."she says cryptically before
+        disappearing into the castle.
+    </p>
+    <p>
+        Which path would you like to choose??
+    </p>
+    <div class="last">
+        <a href="{% url 'game_logic:deadend2' %}">
+            <button type="submit" name="option" value="option2" style="margin-right: 100px;">Go Upstairs in the Treasure Room</button>
+        </a>
+        <a href="{% url 'game_logic:solution' %}">
+            <button type="submit" name="option" value="option2">Go downstairs in the Dungeon Room</button>
+        </a>
+    </div>
+</div>
+
+{% endblock %}

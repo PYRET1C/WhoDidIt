@@ -1,0 +1,181 @@
+{% extends "user_authentication/base.html" %}
+{% load static %}
+{% block body_block %}
+<style>
+  ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+  }
+
+  li {
+    margin: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  li img {
+    width: 250px;
+    height: auto;
+  }
+
+  li label {
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+    font-size: 2rem;
+  }
+
+  h3 {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-weight: bold;
+  }
+
+  .last {
+    margin-top: 0.5rem;
+    text-align: center;
+  }
+
+  img {
+    max-width: 100%;
+  }
+
+  p {
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    font-size: 2.5rem;
+  }
+
+  button[type="submit"] {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    padding-right: 1.5rem;
+    padding-bottom: 1rem;
+    padding-left: 1.5rem;
+    border-radius: 0.25rem;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 3rem;
+    border: none;
+    cursor: pointer;
+  }
+
+  button[type="submit"]:hover {
+    background-color: #3e8e41;
+  }
+</style>
+{% if message %}
+<p style="text-align: center; color:red">{{ message }}</p>
+{% endif %}
+{% if is_correct %}
+<p style="text-align: center; color:green">Scroll Down the page for your answers.</p>
+{% endif %}
+<div class="=jumbotron container">
+  <p>Congratulations, you and your group have found a bottle on a deserted island! But wait, what's this? The bottle
+    contains a map that's been torn into pieces! It looks like you'll need to put the pieces back together in order to
+    make sense of the map. This won't be an easy task, but it's the only way to find your way off this island and to
+    safety.</p>
+  <p>Take your time and be careful not to lose any of the pieces. The success of your group depends on your ability to
+    solve this puzzle and follow the map to your destination. Good luck, and let the adventure begin!</p>
+</div>
+<div class="last">
+  <h3>Puzzle Pieces:</h3>
+  <ul>
+    <li>
+      <label for="piece-1">Piece 1:</label>
+      <img src="{% static '1.png' %}" alt="Puzzle Piece 1">
+    </li>
+    <li>
+      <label for="piece-2">Piece 2:</label>
+      <img src="{% static '2.png' %}" alt="Puzzle Piece 2">
+    </li>
+    <li>
+      <label for="piece-3">Piece 3:</label>
+      <img src="{% static '3.png' %}" alt="Puzzle Piece 3">
+    </li>
+    <li>
+      <label for="piece-4">Piece 4:</label>
+      <img src="{% static '4.png' %}" alt="Puzzle Piece 4">
+    </li>
+    <li>
+      <label for="piece-5">Piece 5:</label>
+      <img src="{% static '5.png' %}" alt="Puzzle Piece 5">
+    </li>
+    <li>
+      <label for="piece-6">Piece 6:</label>
+      <img src="{% static '6.png' %}" alt="Puzzle Piece 6">
+    </li>
+  </ul>
+</div>
+
+<div class="last">
+  <h3>Main Puzzle:</h3>
+  <img src="{% static 'main.png' %}" alt="Main Puzzle">
+  {% if not is_correct %}
+  <p>Please fill in the piece number for each hole:</p>
+  <form action="{% url 'game_logic:clue1' %}" method="post">
+    {% csrf_token %}
+    <ul>
+      <li>
+        <label for="hole-1">Hole A:</label>
+        <input type="text" id="hole-A" name="hole-A">
+      </li>
+      <li>
+        <label for="hole-2">Hole B:</label>
+        <input type="text" id="hole-B" name="hole-B">
+      </li>
+      <li>
+        <label for="hole-3">Hole C:</label>
+        <input type="text" id="hole-C" name="hole-C">
+      </li>
+      <li>
+        <label for="hole-4">Hole D:</label>
+        <input type="text" id="hole-D" name="hole-D">
+      </li>
+      <li>
+        <label for="hole-5">Hole E:</label>
+        <input type="text" id="hole-E" name="hole-E">
+      </li>
+      <li>
+        <label for="hole-6">Hole F:</label>
+        <input type="text" id="hole-F" name="hole-F">
+      </li>
+    </ul>
+    <button type="submit">Submit</button>
+  </form>
+  {% endif %}
+</div>
+{% if is_correct %}
+<br>
+<br>
+<div class="=jumbotron container">
+  <p>As you put the pieces of the map together, a clear image of an island starts to take shape. But something catches
+    your eye - a red "X" marked on the map. It seems like a significant location. You can feel the excitement building
+    inside you as you realize that you might be getting closer to the treasure.</p>
+  <p></p>
+  <img src="{% static 'map_cross.png' %}" alt="Full Map">
+  <p></p>
+  <p>Just as you start to examine the red "X" more closely, you notice something else on the back of the map. There is
+    a riddle scrawled on the parchment, and it looks like it might hold the key to unlocking the mystery of the
+    treasure's location. With your heart racing, you begin to piece together the clues.</p>
+  <p>With the map in hand, you have two leads to follow. One is the riddle on the back of the map and the other is the X
+    that marks a location. Which lead will you follow? The choice is yours, but choose wisely, for the fate of the
+    treasure rests in your
+    hands.</p>
+  <div class="last">
+    <a href="{% url 'game_logic:clue2' %}">
+      <button type="submit" name="option" value="option2" style="margin-right: 100px;">The Map</button>
+    </a>
+    <a href="{% url 'game_logic:deadend1' %}">
+      <button type="submit" name="option" value="option2">The Riddle</button>
+    </a>
+  </div>
+</div>
+{% endif %}
+<p></p>
+<p></p>
+{% endblock %}

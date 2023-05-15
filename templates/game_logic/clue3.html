@@ -1,0 +1,90 @@
+{% extends "user_authentication/base.html" %}
+{% load static %}
+{% block body_block %}
+<style>
+    img {
+        max-width: 100%;
+    }
+
+    .last {
+        margin-top: 0.5rem;
+        text-align: center;
+    }
+
+    button[type="submit"] {
+        margin-top: 1.5rem;
+        margin-left: 1.5rem;
+        padding-top: 0.5rem;
+        padding-right: 0.5rem;
+        padding-bottom: 0.5rem;
+        padding-left: 0.5rem;
+        border-radius: 0.25rem;
+        background-color: #4CAF50;
+        color: white;
+        font-size: 2rem;
+        border: none;
+        cursor: pointer;
+    }
+
+    button[type="submit"]:hover {
+        background-color: #3e8e41;
+    }
+</style>
+{% if is_correct %}
+<div class="last jumbotron container">
+    <b>
+        <p style="color:green;">Scroll down view what is in the opened chest!!!</p>
+    </b>
+</div>
+{% endif %}
+{% if message %}
+<div class="last jumbotron container">
+    <b>
+        <p style="color: red;">{{ message }}</p>
+    </b>
+</div>
+{% endif %}
+<div class="jumbotron container">
+    <p>Congratulations, adventurers! You have made it to the secret room! As you look around, you notice a magnificent
+        chest in the center of the room. It seems to be locked with a complex code, a hint is there on a parchment
+        encoded by the Pirate King himself.
+        The Pirate King was known to be a great admirer of Caesar, and it's highly likely that the cipher used for this
+        code is a variation of the Caesar cipher. You'll need to use your wit and problem-solving skills to decipher the
+        code and unlock the chest. Good luck, and remember, time is of the essence!</p>
+</div>
+<br>
+<br>
+<div class="container jumbotron last">
+    {% if is_correct %}
+    <img src="{% static 'open_chest.png' %}" alt="Open Chest">
+    {% else %}
+    <img src="{% static 'closed_chest.png' %}" alt="Close Chest">
+    {% endif %}
+    <br>
+    <br>
+    <img src="{% static 'parchment.png' %}" alt="Full Map">
+</div>
+<br>
+<br>
+{% if not is_correct %}
+<div class="jumbotron container">
+    <p>Decode the cipher and enter the key in the following field which will open the chest</p>
+    <form action="{% url 'game_logic:clue3' %}" method="post">
+        {% csrf_token %}
+        <div class="last" style="font-size: 2rem;"><input type="text" id="cipher" name="cipher"
+                placeholder="Enter the cipher">
+            <button type="submit">Submit</button>
+        </div>
+    </form>
+    <br>
+    <br>
+</div>
+{% endif %}
+{% if is_correct %}
+<div class="jumbotron container">
+    <div class="last" style="font-size: 2rem;">
+        <a href="{% url 'game_logic:clue4' %}"><button type="submit">Reveal the items in chest -></button></a>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

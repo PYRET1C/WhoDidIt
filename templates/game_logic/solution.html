@@ -1,0 +1,83 @@
+{% extends "user_authentication/base.html" %}
+{% load static %}
+{% block body_block %}
+<style>
+    img {
+        max-width: 100%;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .last {
+        margin-top: 0.5rem;
+        text-align: center;
+    }
+
+    button[type="submit"] {
+        margin-top: 1.5rem;
+        margin-left: 1.5rem;
+        padding-top: 0.5rem;
+        padding-right: 0.5rem;
+        padding-bottom: 0.5rem;
+        padding-left: 0.5rem;
+        border-radius: 0.25rem;
+        background-color: #4CAF50;
+        color: white;
+        font-size: 2rem;
+        border: none;
+        cursor: pointer;
+    }
+
+    button[type="submit"]:hover {
+        background-color: #3e8e41;
+    }
+</style>
+
+<div class="jumbotron container">
+    <p>
+        Asyou made your way down the dark and damp stone stairs, you heard a faint sound of metal clinking against
+        stone. </p>
+    <p>
+        As you entered the dungeon, you found yourself in a narrow and dimly-lit hallway, with small cells lining
+        the walls. You noticed that some of the cells were still occupied by skeletons, remnants of the castle's
+        violent past. However, as you reached the end of the hallway, you saw something that caught your attention.
+    </p>
+    <p>
+        As you explore the dungeons, you notice a faint light shining through a small opening in the corner of the room.
+        Intrigued, you move the pile of rubble to reveal a hidden chest that looks similar to the one you found in the
+        chess
+        room.
+    </p>
+    <p>
+        The chest is locked, but you remember the key the chessboard gave you. You insert the key into the keyhole and
+        pry the chest open to reveal a magnificent artifact:
+    </p>
+    <br>
+
+    <p class="last">
+        A GOLDEN MOUSE
+        <br>
+        <br>
+        <img src="{% static 'mouse.png' %}" alt="Mouse">
+    </p>
+    <br>
+    <p>
+        Upon closer inspection, you find a note inscribed
+        on the bottom of the mouse that reads: "With this golden mouse, you can code in any language on any software."
+    </p>
+    <p>
+        Overwhelmed with joy, you pack the treasure and head back home, eager to try out your new discovery.
+    </p>
+</div>
+<div class="jumbotron container">
+    {% if total_time %}
+    <div class="last">
+        <p>Your total time taken is {{ total_time }}</p>
+    </div>
+    {% endif %}
+    <div class="last" style="font-size: 2rem;">
+        <a href="{% url 'index' %}"><button type="submit">PLay Again!</button></a>
+    </div>
+</div>
+{% endblock %}

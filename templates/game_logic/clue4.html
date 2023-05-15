@@ -1,0 +1,112 @@
+{% extends "user_authentication/base.html" %}
+{% load static %}
+{% block body_block %}
+<style>
+    img {
+        max-width: 60%;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .last {
+        margin-top: 0.5rem;
+        text-align: center;
+    }
+
+    button[type="submit"] {
+        margin-top: 1.5rem;
+        margin-left: 1.5rem;
+        padding-top: 0.5rem;
+        padding-right: 0.5rem;
+        padding-bottom: 0.5rem;
+        padding-left: 0.5rem;
+        border-radius: 0.25rem;
+        background-color: #4CAF50;
+        color: white;
+        font-size: 2rem;
+        border: none;
+        cursor: pointer;
+    }
+
+    button[type="submit"]:hover {
+        background-color: #3e8e41;
+    }
+</style>
+
+{% if is_correct %}
+<div class="jumbotron container">
+    <div class="last">
+        <b>
+            <p style="color:green;">Scroll down to see what the result!!!</p>
+        </b>
+    </div>
+</div>
+{% endif %}
+{% if message %}
+<div class="jumbotron container">
+    <div class="last">
+        <b>
+            <p style="color: red;">{{ message }}</p>
+        </b>
+    </div>
+</div>
+{% endif %}
+<div class="jumbotron container">
+    <p>As you open the chest, a magical chess board appears before you. You see an inscription on the chest that reads,
+        "Whoever mates the black king will be granted the true location of the treasure." You realize that this could be
+        your chance to find the treasure you have been searching for.</p>
+    <p>You see that the board is set up for a game, and there is a blank space with the words "Your move" written beside
+        it. You pick up a chessboard piece and realize that this could be the key to unlocking
+        the location of the treasure.</p>
+</div>
+<br>
+<br>
+<img src="{% static 'chess.jpg' %}" alt="Full Map">
+<br>
+<br>
+<div class="jumbotron container">
+    <p>To make your move select the piece from the list below and type your cell position in the space provided. Each
+        cell has two coordinates alphabets and numbers. For example first cell is a1 last cell is h8. You can calculate
+        your cell number by looking at the markings provided along the right side and bottom of the board. You are
+        playing as white and have to checkmate black king in one move.</p>
+    {% if not is_correct %}
+    <form action="{% url 'game_logic:clue4' %}" method="post">
+        {% csrf_token %}
+        <div style="display: flex; flex-direction: row; align-items: center; margin-left: 100px;">
+            <div style="margin-right: 20px;">
+                <p style="font-size: 2rem; margin-top: 50px;">Select a piece:</p>
+                <input type="radio" id="pawn" name="piece" value="pawn" style="transform: scale(1.5);">
+                <label for="pawn" style="font-size: 2rem;">Pawn</label><br>
+                <input type="radio" id="bishop" name="piece" value="bishop" style="transform: scale(1.5);">
+                <label for="bishop" style="font-size: 2rem;">Bishop</label><br>
+                <input type="radio" id="knight" name="piece" value="knight" style="transform: scale(1.5);">
+                <label for="knight" style="font-size: 2rem;">Knight</label><br>
+                <input type="radio" id="rook" name="piece" value="rook" style="transform: scale(1.5);">
+                <label for="rook" style="font-size: 2rem;">Rook</label><br>
+                <input type="radio" id="queen" name="piece" value="queen" style="transform: scale(1.5);">
+                <label for="queen" style="font-size: 2rem;">Queen</label><br>
+                <input type="radio" id="king" name="piece" value="king" style="transform: scale(1.5);">
+                <label for="king" style="font-size: 2rem;">King</label><br>
+            </div>
+            <div style="margin-left: 200px;">
+                <p style="font-size: 2rem;">Cell coordinate (a1, h8, etc.)</p>
+                <div style="display: flex; flex-direction: row; align-items: center;">
+                    <input type="text" id="move" name="move" placeholder="Enter the coordinate"
+                        style="font-size: 2rem;">
+                    <button type="submit" style="margin-bottom: 10px;">Submit</button>
+                </div>
+            </div>
+        </div>
+    </form>
+    {% endif %}
+</div>
+{% if is_correct %}
+<div class="jumbotron container">
+    <p></p>
+    <div class="last" style="font-size: 2rem;">
+        <a href="{% url 'game_logic:clue5' %}"><button type="submit">What happened !!</button></a>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
